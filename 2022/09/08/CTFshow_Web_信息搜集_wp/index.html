@@ -73,7 +73,7 @@
         <div class="stuff">
             <span>九月 08, 2022</span>
             
-  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/ctfshow/" rel="tag">ctfshow</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/ctfshow/" rel="tag">ctfshow</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/web/" rel="tag">web</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/" rel="tag">信息搜集</a></li></ul>
 
 
         </div>
@@ -84,13 +84,13 @@
 <h1 id="前台JS绕过"><a href="#前台JS绕过" class="headerlink" title="前台JS绕过"></a>前台JS绕过</h1><p>右键和F12无法查看源代码，但只对前端有限制，我们可以尝试burp抓包，flag就在源码中。</p>
 <p><strong>值得注意的一点！</strong></p>
 <p>突发奇想，之前使用githack爬没有git泄露的网站的时候，也会把.git爬下来，里面就保存着网站源码，所以我用githack爬了一下URL&#x2F;.git&#x2F;，在.&#x2F;.git&#x2F;index里就是网页源码：</p>
-<img src="/2022/09/08/CTFshow-Web-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86-wp/1.png" class="" title="This is an example image">
+<img src="/2022/09/08/CTFshow_Web_%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86_wp/1.png" class="" title="This is an example image">
 
 <p>可以看到代码中用script对查看源码的操作做了限制。</p>
 <h1 id="协议头信息泄露"><a href="#协议头信息泄露" class="headerlink" title="协议头信息泄露"></a>协议头信息泄露</h1><p>F12看不到东西，可以用burp抓个包看看，更简单的方法是F12查看“网络”一栏，刷新一下就可以看到请求头和响应头了，在响应头中拿到flag。</p>
 <h1 id="robots后台泄露"><a href="#robots后台泄露" class="headerlink" title="robots后台泄露"></a>robots后台泄露</h1><p>F12和抓包都没什么特别的，访问robots.txt，看到一个似乎藏着flag的txt文件，访问，拿到flag。</p>
 <h1 id="phps源码泄露"><a href="#phps源码泄露" class="headerlink" title="phps源码泄露"></a>phps源码泄露</h1><p>访问index.phps，拿到源码和flag，老生常谈。</p>
-<h1 id="源码压缩包泄露"><a href="#源码压缩包泄露" class="headerlink" title="源码压缩包泄露"></a>源码压缩包泄露</h1><img src="/2022/09/08/CTFshow-Web-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86-wp/2.png" class="" title="This is an example image">
+<h1 id="源码压缩包泄露"><a href="#源码压缩包泄露" class="headerlink" title="源码压缩包泄露"></a>源码压缩包泄露</h1><img src="/2022/09/08/CTFshow_Web_%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86_wp/2.png" class="" title="This is an example image">
 
 <p>利用python脚本爆破源码压缩包的名字，这里因为访问所有名字都是200，所以特意加一个r.text输出的具体一点，果不其然，www.zip含有特殊文件，下载下来解压，根据提示访问fl000g.txt，解决。</p>
 <h1 id="版本控制泄露源码"><a href="#版本控制泄露源码" class="headerlink" title="版本控制泄露源码"></a>版本控制泄露源码</h1><p>其实并不清楚是使用什么软件进行的版本控制，首先访问&#x2F;.git，结束了……</p>
@@ -102,51 +102,51 @@
 
 <p>这个题现在扫不出来flag了，我看以前是可以的。</p>
 <h1 id="敏感信息公布"><a href="#敏感信息公布" class="headerlink" title="敏感信息公布"></a>敏感信息公布</h1><p>是个卖货的平台，一堆按钮都没啥用，在最下面发现了这个电话号码：</p>
-<img src="/2022/09/08/CTFshow-Web-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86-wp/3.png" class="" title="This is an example image">
+<img src="/2022/09/08/CTFshow_Web_%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86_wp/3.png" class="" title="This is an example image">
 
 <p>暂时不知道怎么用，先收集一些其他信息吧，访问robots.txt，发现：</p>
-<img src="/2022/09/08/CTFshow-Web-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86-wp/4.png" class="" title="This is an example image">
+<img src="/2022/09/08/CTFshow_Web_%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86_wp/4.png" class="" title="This is an example image">
 
 <p>有一个admin目录反爬，访问一下，要求我们登录，猜想这个敏感的电话号码可能是admin的密码（题目也给出了提示），试一下，get了flag。</p>
 <h1 id="内部技术文档泄露"><a href="#内部技术文档泄露" class="headerlink" title="内部技术文档泄露"></a>内部技术文档泄露</h1><p>一种新的泄露，还是一个电商页面，那我们就来找技术文档吧，看到最后有一个document：</p>
-<img src="/2022/09/08/CTFshow-Web-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86-wp/5.png" class="" title="This is an example image">
+<img src="/2022/09/08/CTFshow_Web_%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86_wp/5.png" class="" title="This is an example image">
 
 <p>访问一下试试，发现真的是pdf版操作手册，最下面有这样的话：</p>
-<img src="/2022/09/08/CTFshow-Web-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86-wp/6.png" class="" title="This is an example image">
+<img src="/2022/09/08/CTFshow_Web_%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86_wp/6.png" class="" title="This is an example image">
 
 <p>按照提示，访问&#x2F;system1103&#x2F;login.php，按要求登录就拿到flag啦。</p>
 <h1 id="编辑器配置不当"><a href="#编辑器配置不当" class="headerlink" title="编辑器配置不当"></a>编辑器配置不当</h1><p>版本&lt;&#x3D;4.1.11的Kindeditor存在一个文件上传漏洞（CVE-2017-1002024），不过本题不需要复现这个漏洞。</p>
 <p>首先查看源码，在里面发现可以访问&#x2F;editor目录，访问一下，出现了，野生的kindeditor！</p>
-<img src="/2022/09/08/CTFshow-Web-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86-wp/7.png" class="" title="This is an example image">
+<img src="/2022/09/08/CTFshow_Web_%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86_wp/7.png" class="" title="This is an example image">
 
 <p>点击插入文件，我们发现可以直接访问文件空间！网站位置一般是在&#x2F;var&#x2F;www&#x2F;html里，在&#x2F;var&#x2F;www&#x2F;html&#x2F;nothinghere里面找到flag文件，index.php和这个文件是在同一目录下的，所以访问</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://919b76c2-9f18-476e-bbca-13086e611763.challenge.ctf.show/nothinghere/fl000g.txt</span><br></pre></td></tr></table></figure>
 
 <p>拿到flag。</p>
 <h1 id="密码逻辑脆弱"><a href="#密码逻辑脆弱" class="headerlink" title="密码逻辑脆弱"></a>密码逻辑脆弱</h1><p>服务器不太行，扫不了后台。</p>
-<img src="/2022/09/08/CTFshow-Web-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86-wp/8.png" class="" title="This is an example image">
+<img src="/2022/09/08/CTFshow_Web_%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86_wp/8.png" class="" title="This is an example image">
 <p> 访问admin页面，是一个登录页面：</p>
-<img src="/2022/09/08/CTFshow-Web-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86-wp/9.png" class="" title="This is an example image">
+<img src="/2022/09/08/CTFshow_Web_%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86_wp/9.png" class="" title="This is an example image">
 
 <p>点一下忘记密码，要验证一个密保问题，所在地是哪一个城市。记得主页面里面有个qq邮箱，查一下这个qq所在地发现是西安，填写西安，密码被自动重置，登录即可拿到flag。</p>
-<h1 id="探针泄露"><a href="#探针泄露" class="headerlink" title="探针泄露"></a>探针泄露</h1><img src="/2022/09/08/CTFshow-Web-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86-wp/10.png" class="" title="This is an example image">
+<h1 id="探针泄露"><a href="#探针泄露" class="headerlink" title="探针泄露"></a>探针泄露</h1><img src="/2022/09/08/CTFshow_Web_%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86_wp/10.png" class="" title="This is an example image">
 
 <p>有的网站会在创建时在根目录留下探针，直接访问URL&#x2F;tz.php：</p>
-<img src="/2022/09/08/CTFshow-Web-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86-wp/11.png" class="" title="This is an example image">
+<img src="/2022/09/08/CTFshow_Web_%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86_wp/11.png" class="" title="This is an example image">
 
 <p>访问phpinfo，environment里找到flag。</p>
 <h1 id="备份数据库文件泄露"><a href="#备份数据库文件泄露" class="headerlink" title="备份数据库文件泄露"></a>备份数据库文件泄露</h1><p>默认backup.sql，直接拿到即可。  </p>
 <h1 id="JS敏感信息泄露"><a href="#JS敏感信息泄露" class="headerlink" title="JS敏感信息泄露"></a>JS敏感信息泄露</h1><p>一般这种玩游戏的很少是真让你玩的（如果你真能玩通关另当别论），很有可能在js文件中泄露出来。</p>
-<img src="/2022/09/08/CTFshow-Web-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86-wp/12.png" class="" title="This is an example image">
+<img src="/2022/09/08/CTFshow_Web_%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86_wp/12.png" class="" title="This is an example image">
 
 <p>如果得分过了100，那么会弹出一个弹窗，里面是Unicode编码，拿去解一下：</p>
-<img src="/2022/09/08/CTFshow-Web-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86-wp/13.png" class="" title="This is an example image">
+<img src="/2022/09/08/CTFshow_Web_%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86_wp/13.png" class="" title="This is an example image">
 
 <p>访问URL&#x2F;110.php，拿到flag。</p>
-<h1 id="前端密钥泄露"><a href="#前端密钥泄露" class="headerlink" title="前端密钥泄露"></a>前端密钥泄露</h1><img src="/2022/09/08/CTFshow-Web-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86-wp/14.png" class="" title="This is an example image">
+<h1 id="前端密钥泄露"><a href="#前端密钥泄露" class="headerlink" title="前端密钥泄露"></a>前端密钥泄露</h1><img src="/2022/09/08/CTFshow_Web_%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86_wp/14.png" class="" title="This is an example image">
 
 <p>查看前端js源码，发现是将密码进行AES加密，如果密码加密结果是a599ac85a73384ee3219fa684296eaa62667238d608efa81837030bd1ce1bf04，那么登录成功。该AES工作模式CBC，填充为ZeroPadding。明白之后就直接丢进工具解密即可，注意编码格式是hex。</p>
-<img src="/2022/09/08/CTFshow-Web-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86-wp/15.png" class="" title="This is an example image">
+<img src="/2022/09/08/CTFshow_Web_%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86_wp/15.png" class="" title="This is an example image">
 
 <p>拿到密码，输入用户名admin和密码即可拿到flag。（正经人谁把密钥放前端啊kora！）</p>
 <h1 id="数据库恶意下载"><a href="#数据库恶意下载" class="headerlink" title="数据库恶意下载"></a>数据库恶意下载</h1><p>asp+access的数据库文件为mdb文件，访问URL&#x2F;db&#x2F;db.mdb，可以下载到mdb文件，用excel就可以打开表，表中可以找到flag。</p>
