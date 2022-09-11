@@ -98,7 +98,7 @@
 <p>所以最后渲染出的页面是一级标题”hello”。</p>
 <p><code>&#123;&#123;&#125;&#125;</code>不仅可以用于传递变量，还可以用于执行表达式，比如传入<code>&#123;&#123;1+1&#125;&#125;</code>，页面会显示2。</p>
 <p><strong>这里有一点需要注意</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@app.route(&quot;/index&quot;) </span><br><span class="line">def hello():</span><br><span class="line">    s = &quot;&lt;h1&gt;%s&lt;/h1&gt;&quot; % var return render_template_string(s)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@app.route(&quot;/index&quot;) </span><br><span class="line">def hello():</span><br><span class="line">    s = &quot;&lt;h1&gt;%s&lt;/h1&gt;&quot; % var </span><br><span class="line">    return render_template_string(s)</span><br></pre></td></tr></table></figure>
 
 <p>我们可以通过操控var的值来操控s的值，所以我们可以构造语句造成漏洞，比如构造xss语句。下面这个不太一样：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@app.route(&quot;/index&quot;) </span><br><span class="line">def hello(): </span><br><span class="line">    return render_template_string(&#x27;&lt;h1&gt;&#123;&#123;var&#125;&#125;&lt;/h1&gt;&#x27;, var=var)</span><br></pre></td></tr></table></figure>
