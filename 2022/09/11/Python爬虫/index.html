@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Python爬虫 - Crazysong</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="前言爬虫其实就是对url进行http请求，获得对应响应的工具。python爬虫分三部分来学习，分别是：requests、BeautifulSoup、Scrapy。requests库负责爬取内容，Be,"> 
+    <meta name="author" content="crazysong11"> 
+    <link rel="alternative" href="atom.xml" title="Crazysong" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="Python爬虫 - Crazysong"/>
+    <meta name="twitter:description" content="前言爬虫其实就是对url进行http请求，获得对应响应的工具。python爬虫分三部分来学习，分别是：requests、BeautifulSoup、Scrapy。requests库负责爬取内容，Be,"/>
+    
+    
+    
+    
+    <meta property="og:site_name" content="Crazysong"/>
+    <meta property="og:type" content="object"/>
+    <meta property="og:title" content="Python爬虫 - Crazysong"/>
+    <meta property="og:description" content="前言爬虫其实就是对url进行http请求，获得对应响应的工具。python爬虫分三部分来学习，分别是：requests、BeautifulSoup、Scrapy。requests库负责爬取内容，Be,"/>
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+    <script>window.searchDbPath = "/search.xml";</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Crazysong</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://crazysong11.github.io"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Python爬虫</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Python爬虫</h1>
+        <div class="stuff">
+            <span>九月 11, 2022</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>爬虫其实就是对url进行http请求，获得对应响应的工具。<br>python爬虫分三部分来学习，分别是：requests、BeautifulSoup、Scrapy。<br>requests库负责爬取内容，BeautifulSoup库负责解析HTML文本，Scrapy是一个爬虫框架。<br>一般个人编写简单脚本使用前两个就足够，Scrapy这里不进行深入学习，有时间有兴趣再进行学习。</p>
+<h1 id="requests库"><a href="#requests库" class="headerlink" title="requests库"></a>requests库</h1><p>requests库有七个主要方法，它们与HTTP的请求方式相对应：</p>
+<ul>
+<li>requests.requests()</li>
+<li>requests.get()</li>
+<li>requests.post()</li>
+<li>requests.head()</li>
+<li>requests.put()</li>
+<li>requests.patch()</li>
+<li>requests.delete()</li>
+</ul>
+<h2 id="requests-requests"><a href="#requests-requests" class="headerlink" title="requests.requests()"></a>requests.requests()</h2><p>其他方法的爹，基础方法，一般不用它而用其他具体方法，有13个参数，在其他方法中会具体实现。</p>
+<ul>
+<li>params：字典或字节序列，作为参数增加到url中。一般get用</li>
+<li>data：字典、字节序列或文件，作为Request的内容。一般POST用</li>
+<li>json：json格式内容，作为Request的内容。一般POST用</li>
+<li>headers：http定制头。</li>
+<li>cookies：字典或CookieJar，Requests中的cookie</li>
+<li>auth：元组，支持http认证</li>
+<li>files：字典类型，传输文件。字典的值为文件流</li>
+<li>timeout：设定超时时间，单位是秒，值为数</li>
+<li>proxies：字典类型，设定访问代理服务器，可以增加登录认证</li>
+<li>stream : True&#x2F;False，默认为True，获取内容立即下载开关</li>
+<li>verify : True&#x2F;False，默认为True，认证SSL证书开关</li>
+<li>cert : 本地SSL证书路径</li>
+</ul>
+<h2 id="requests-get"><a href="#requests-get" class="headerlink" title="requests.get()"></a>requests.get()</h2><p>发送一次get请求，三个参数url，params和其他可选参数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">url = &quot;http://aaa.com&quot;</span><br><span class="line">params = &#123;&#x27;a&#x27;:1, &#x27;b&#x27;:2&#125;</span><br><span class="line">r = requests.get(url, params)</span><br></pre></td></tr></table></figure>
+<p>上面的代码相当于请求了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://aaa.com?a=1&amp;b=2</span><br></pre></td></tr></table></figure>
+<h2 id="requests-post"><a href="#requests-post" class="headerlink" title="requests.post()"></a>requests.post()</h2><p>发送一次post请求，四个参数url，data，json和其他可选参数。<br>关于data和json的区别，详见这篇：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/202978890">requests中post参数data和json区别</a>，一般用json即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">url = &quot;http://aaa.com&quot;</span><br><span class="line">json = &#123;&#x27;a&#x27;:1, &#x27;b&#x27;:2&#125;</span><br><span class="line">r = requests.post(url, json)</span><br></pre></td></tr></table></figure>
+<p>上面的代码相当于请求了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://aaa.com</span><br></pre></td></tr></table></figure>
+<p>并向其post了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a=1&amp;b=2</span><br></pre></td></tr></table></figure>
+<p>其他方法使用较少且方法类似，就不多说了。</p>
+<h2 id="Response对象"><a href="#Response对象" class="headerlink" title="Response对象"></a>Response对象</h2><p>请求方法的返回值是一个Response对象，比如下面的r就是一个Response对象</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r = requests.get(url)</span><br></pre></td></tr></table></figure>
+<p>Response对象几个常用的属性如下：</p>
+<ul>
+<li>status_code：状态码</li>
+<li>text：http相应内容的字符串形式，HTML文本</li>
+<li>encoding：猜测的编码方式</li>
+<li>apparant_encoding：分析之后得出的编码方式（备选编码方式，一般为UTF-8）</li>
+<li>content：http相应内容的二进制形式<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">r = requests.get(url)</span><br><span class="line">#输出状态码</span><br><span class="line">print(r.status_code)</span><br><span class="line">#输出编码方式</span><br><span class="line">print(r.encoding)</span><br><span class="line">#如果猜测编码方式不正确，修复编码方式</span><br><span class="line">r.encoding = r.apparant_encoding</span><br><span class="line">#输出HTML文本内容</span><br><span class="line">print(r.text)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="robots协议"><a href="#robots协议" class="headerlink" title="robots协议"></a>robots协议</h2><p>就是限制爬虫访问的东西，一般在网站根目录下有个robots.txt文件，里面写了对某些user-agent禁止访问某些url，也就是反爬。<br>基本语法：#代表注释，*代表所有，&#x2F;代表根目录。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User-agent: *</span><br><span class="line">Disallow: /secret.php</span><br></pre></td></tr></table></figure>
+<p>表明所有种类搜索引擎都访问不到&#x2F;secret.php文件。</p>
+<h1 id="BeautifulSoup库"><a href="#BeautifulSoup库" class="headerlink" title="BeautifulSoup库"></a>BeautifulSoup库</h1><h2 id="基本理解"><a href="#基本理解" class="headerlink" title="基本理解"></a>基本理解</h2><p>HTML和XML是由标签构成的树状结构，BeautifulSoup库就是对这个标签树进行解析、遍历、维护的工具。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">from bs4 import BeautifulSoup</span><br><span class="line">url = &quot;http://aaa.com&quot;</span><br><span class="line">r = requests.get(url)</span><br><span class="line">soup = BeautifulSoup(r.text, &#x27;html.parser&#x27;)</span><br><span class="line">print(soup.prettify())</span><br></pre></td></tr></table></figure>
+<h2 id="基本元素"><a href="#基本元素" class="headerlink" title="基本元素"></a>基本元素</h2><ul>
+<li>Tag：标签</li>
+<li>Name：标签名</li>
+<li>Attributes：标签的属性，字典类型</li>
+<li>NavigableString：标签的内容字符串</li>
+<li>Comment：标签内容字符串的注释部分<br>例如：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#获取soup中的a标签元素</span></span><br><span class="line">tag = soup.a                    <span class="comment"># &lt;a href=&#x27;http://aaa.com&#x27; id=&#x27;user&#x27;&gt;&lt;!-- this is a comment--&gt;user1&lt;/a&gt;</span></span><br><span class="line"><span class="comment">#获取标签的名称</span></span><br><span class="line">tag_name = soup.a.name          <span class="comment"># &#x27;a&#x27;</span></span><br><span class="line"><span class="comment">#获取标签的属性</span></span><br><span class="line">tag_attr = soup.a.attrs         <span class="comment"># &#123;&#x27;href&#x27;:&#x27;http://aaa.com&#x27;, &#x27;id&#x27;:&#x27;user&#x27;&#125;</span></span><br><span class="line"><span class="comment">#获取标签的非属性字符串</span></span><br><span class="line">tag_string = soup.a.string      <span class="comment"># &#x27;user1&#x27;</span></span><br><span class="line"><span class="built_in">type</span>(tag_string)                <span class="comment"># &lt;class &#x27;bs4.element.NavigableString&#x27;&gt;</span></span><br><span class="line"><span class="comment">#获取标签的注释字符串</span></span><br><span class="line">tag_comment = soup.a.comment    <span class="comment"># &#x27;this is a comment&#x27;</span></span><br><span class="line"><span class="built_in">type</span>(tag_comment)               <span class="comment"># &lt;class &#x27;bs4.element.Comment&#x27;&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title="0" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                        
+                            <li title="1" data-url="http://link.hhtjim.com/163/425570952.mp3"></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+        
+    <div id="gitalk-container" class="comment link"
+		data-enable="false"
+        data-ae="false"
+        data-ci=""
+        data-cs=""
+        data-r=""
+        data-o=""
+        data-a=""
+        data-d="false"
+    >查看评论</div>
+
+
+    </div>
+    
+        <div class="side">
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#requests%E5%BA%93"><span class="toc-number">2.</span> <span class="toc-text">requests库</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#requests-requests"><span class="toc-number">2.1.</span> <span class="toc-text">requests.requests()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#requests-get"><span class="toc-number">2.2.</span> <span class="toc-text">requests.get()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#requests-post"><span class="toc-number">2.3.</span> <span class="toc-text">requests.post()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Response%E5%AF%B9%E8%B1%A1"><span class="toc-number">2.4.</span> <span class="toc-text">Response对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#robots%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.5.</span> <span class="toc-text">robots协议</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#BeautifulSoup%E5%BA%93"><span class="toc-number">3.</span> <span class="toc-text">BeautifulSoup库</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%90%86%E8%A7%A3"><span class="toc-number">3.1.</span> <span class="toc-text">基本理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%85%83%E7%B4%A0"><span class="toc-number">3.2.</span> <span class="toc-text">基本元素</span></a></li></ol></li></ol>
+        </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
